@@ -5,6 +5,7 @@
  */
 package com.kalsr8025;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
@@ -24,6 +25,10 @@ public class Ball {
         this.dx = 1;
         this.dy = 1;
     }
+    
+        public boolean collidesWith (Paddle p){
+        return shape.overlaps(p.getBounds());
+    }
 
     public void move() {
         shape.x += speed * dx;
@@ -38,12 +43,23 @@ public class Ball {
         dy = dy * -1;
     }
     
-    public float getX (){
+    public float getLeft(){
         return shape.x;
     }
     
-    public float getY(){
+    public float getBottom(){
         return shape.y;
     }
 
+    public float getRight(){
+        return shape.x + shape.width;
+    }
+    
+    public float getTop(){
+        return shape.y + shape.height;
+    }
+    
+     public void draw(ShapeRenderer shapeBatch){
+     shapeBatch.rect(shape.x, shape.y, shape.width, shape.height);
+    }
 }
